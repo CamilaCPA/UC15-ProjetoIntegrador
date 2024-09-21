@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+    <head>
+        <title>Editar Transação</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+        <h1>Editar Transação</h1>
+        <form th:action="@{/update/{id}(id=${transaction.id})}" method="post">
+            <div class="form-group">
+                <label for="description">Descrição</label>
+                <input type="text" id="description" name="description" class="form-control" placeholder="Descrição" th:value="${transaction.description}" required>
+            </div>
+            <div class="form-group">
+                <label for="amount">Valor</label>
+                <input type="number" id="amount" name="amount" class="form-control" placeholder="Valor" th:value="${transaction.amount}" required>
+            </div>
+            <div class="form-group">
+                <label for="type">Tipo</label>
+                <select id="type" name="type" class="form-control">
+                    <option value="RECEITA" th:selected="${transaction.type == 'RECEITA'}">Receita</option>
+                    <option value="DESPESA" th:selected="${transaction.type == 'DESPESA'}">Despesa</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Atualizar</button>
+        
+        <a href="/" class="btn btn-secondary">Voltar</a>
+        </form>
+    </div>
+    </body>
+</html>

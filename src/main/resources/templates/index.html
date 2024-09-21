@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html lang="pt-BR">
+    <head>
+        <title>Controle Financeiro Pessoal</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+        <h1>Controle Financeiro Pessoal</h1>
+        <h2>Saldo: R$ <span th:text="${balance}"></span></h2>
+        <form action="/add" method="post">
+            <input type="text" name="description" placeholder="Descrição" required>
+            <input type="number" name="amount" placeholder="Valor" required>
+            <select name="type">
+                <option value="RECEITA">Receita</option>
+                <option value="DESPESA">Despesa</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Adicionar</button>
+        </form>
+        <h3>Transações</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                    <th>Tipo</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="transaction : ${transactions}">
+                    <td th:text="${transaction.description}"></td>
+                    <td th:text="${transaction.amount}"></td>
+                    <td th:text="${transaction.type}"></td>
+                    <td>
+                        <a th:href="@{/edit/{id}(id=${transaction.id})}" class="btn btn-warning">Editar</a>
+                        <form th:action="@{/delete/{id}(id=${transaction.id})}" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-danger">Deletar</button>
+                        </form>
+                        
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </body>
+</html>
